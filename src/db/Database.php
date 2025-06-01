@@ -10,12 +10,8 @@ class Database {
     private static $instance = null;
     private $connection;
     
-    /**
-     * Private constructor to prevent direct instantiation
-     */
     private function __construct() {
         try {
-            // For XAMPP on Mac, use the correct socket path
             if (DB_HOST === 'localhost') {
                 $dsn = "mysql:unix_socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock;dbname=" . DB_NAME . ";charset=utf8mb4";
             } else {
@@ -37,11 +33,7 @@ class Database {
         }
     }
     
-    /**
-     * Get singleton instance
-     * 
-     * @return Database
-     */
+    // Get singleton instance
     public static function getInstance() {
         if (self::$instance === null) {
             self::$instance = new self();
@@ -49,57 +41,31 @@ class Database {
         return self::$instance;
     }
     
-    /**
-     * Get database connection
-     * 
-     * @return PDO
-     */
+    // Get database connection
     public function getConnection() {
         return $this->connection;
     }
     
-    /**
-     * Execute a query with parameters
-     * 
-     * @param string $sql SQL query
-     * @param array $params Parameters for prepared statement
-     * @return PDOStatement
-     */
+    // Execute a query with parameters
     public function query($sql, $params = []) {
         $stmt = $this->connection->prepare($sql);
         $stmt->execute($params);
         return $stmt;
     }
     
-    /**
-     * Get a single record
-     * 
-     * @param string $sql SQL query
-     * @param array $params Parameters for prepared statement
-     * @return array|null
-     */
+    // Get a single record
     public function fetchOne($sql, $params = []) {
         $stmt = $this->query($sql, $params);
         return $stmt->fetch();
     }
     
-    /**
-     * Get multiple records
-     * 
-     * @param string $sql SQL query
-     * @param array $params Parameters for prepared statement
-     * @return array
-     */
+    // Get multiple records
     public function fetchAll($sql, $params = []) {
         $stmt = $this->query($sql, $params);
         return $stmt->fetchAll();
     }
     
-    /**
-     * Get the ID of the last inserted row
-     * 
-     * @return string
-     */
+    // Get the ID of the last inserted row
     public function lastInsertId() {
         return $this->connection->lastInsertId();
     }

@@ -10,7 +10,6 @@ class AlbumTest extends TestCase
 {
     protected function setUp(): void
     {
-        // Include config to define database constants
         require_once __DIR__ . '/../../config/config.php';
     }
 

@@ -11,13 +11,7 @@ class Track {
         $this->db = Database::getInstance();
     }
     
-    /**
-     * Search tracks by name or get tracks by composer
-     * 
-     * @param string|null $search Search term for track name
-     * @param string|null $composer Composer name
-     * @return array
-     */
+    // Search tracks by name or get tracks by composer
     public function search($search = null, $composer = null) {
         $sql = "SELECT t.TrackId, t.Name, t.AlbumId, t.Composer, t.Milliseconds, t.Bytes, t.UnitPrice,
                        a.Title as AlbumTitle, ar.Name as ArtistName,
@@ -51,12 +45,7 @@ class Track {
         return $this->db->fetchAll($sql, $params);
     }
     
-    /**
-     * Get track by ID
-     * 
-     * @param int $id Track ID
-     * @return array|false
-     */
+    // Get track by ID
     public function getById($id) {
         $sql = "SELECT t.TrackId, t.Name, t.AlbumId, t.Composer, t.Milliseconds, t.Bytes, t.UnitPrice,
                        a.Title as AlbumTitle, ar.Name as ArtistName,
@@ -71,12 +60,7 @@ class Track {
         return $this->db->fetchOne($sql, [$id]);
     }
     
-    /**
-     * Create a new track
-     * 
-     * @param array $data Track data
-     * @return int|string|false The new track ID or false on failure
-     */
+    // Create a new track
     public function create($data) {
         $sql = "SELECT MAX(TrackId) as maxId FROM Track";
         $result = $this->db->fetchOne($sql);
@@ -102,13 +86,7 @@ class Track {
         return $newId;
     }
     
-    /**
-     * Update a track
-     * 
-     * @param int $id Track ID
-     * @param array $data Data to update
-     * @return bool
-     */
+    // Update a track
     public function update($id, $data) {
         $fields = [];
         $params = [];
@@ -142,12 +120,7 @@ class Track {
         return true;
     }
     
-    /**
-     * Delete a track
-     * 
-     * @param int $id Track ID
-     * @return bool
-     */
+    // Delete a track
     public function delete($id) {
         // Check if track is in any playlist
         $sql = "SELECT COUNT(*) as count FROM PlaylistTrack WHERE TrackId = ?";
@@ -162,13 +135,7 @@ class Track {
         return true;
     }
     
-    /**
-     * Check if a track exists in a playlist
-     * 
-     * @param int $trackId Track ID
-     * @param int $playlistId Playlist ID
-     * @return bool
-     */
+    // Check if a track exists in a playlist
     public function existsInPlaylist($trackId, $playlistId) {
         $sql = "SELECT COUNT(*) as count FROM PlaylistTrack WHERE PlaylistId = ? AND TrackId = ?";
         $result = $this->db->fetchOne($sql, [$playlistId, $trackId]);

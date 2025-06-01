@@ -13,11 +13,7 @@ class ArtistController extends BaseController {
         $this->artistModel = new Artist();
     }
     
-    /**
-     * Get all artists, optionally filtered by search term
-     * 
-     * @return void
-     */
+    // Get all artists, optionally filtered by search term
     public function getAll() {
         $params = $this->getRequestParams();
         $search = isset($params['s']) ? $params['s'] : null;
@@ -26,12 +22,7 @@ class ArtistController extends BaseController {
         $this->sendResponse($artists);
     }
     
-    /**
-     * Get a single artist by ID
-     * 
-     * @param int $id Artist ID
-     * @return void
-     */
+    // Get a single artist by ID
     public function getOne($id) {
         $artist = $this->artistModel->getById($id);
         
@@ -43,12 +34,7 @@ class ArtistController extends BaseController {
         $this->sendResponse($artist);
     }
     
-    /**
-     * Get all albums by an artist
-     * 
-     * @param int $id Artist ID
-     * @return void
-     */
+    // Get all albums by an artist
     public function getAlbums($id) {
         $artist = $this->artistModel->getById($id);
         
@@ -61,11 +47,7 @@ class ArtistController extends BaseController {
         $this->sendResponse($albums);
     }
     
-    /**
-     * Create a new artist
-     * 
-     * @return void
-     */
+    // Create a new artist
     public function create() {
         $params = $this->getRequestParams();
         
@@ -85,12 +67,7 @@ class ArtistController extends BaseController {
         $this->sendResponse($artist, 201);
     }
     
-    /**
-     * Delete an artist
-     * 
-     * @param int $id Artist ID
-     * @return void
-     */
+    // Delete an artist
     public function delete($id) {
         $artist = $this->artistModel->getById($id);
         

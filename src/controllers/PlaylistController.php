@@ -16,11 +16,7 @@ class PlaylistController extends BaseController {
         $this->trackModel = new Track();
     }
     
-    /**
-     * Get all playlists, optionally filtered by search term
-     * 
-     * @return void
-     */
+    // Get all playlists, optionally filtered by search term
     public function getAll() {
         $params = $this->getRequestParams();
         $search = isset($params['s']) ? $params['s'] : null;
@@ -29,12 +25,7 @@ class PlaylistController extends BaseController {
         $this->sendResponse($playlists);
     }
     
-    /**
-     * Get a single playlist by ID with its tracks
-     * 
-     * @param int $id Playlist ID
-     * @return void
-     */
+    // Get a single playlist by ID with its tracks
     public function getOne($id) {
         $playlist = $this->playlistModel->getById($id);
         
@@ -53,11 +44,7 @@ class PlaylistController extends BaseController {
         $this->sendResponse($response);
     }
     
-    /**
-     * Create a new playlist
-     * 
-     * @return void
-     */
+    // Create a new playlist
     public function create() {
         $params = $this->getRequestParams();
         
@@ -77,12 +64,7 @@ class PlaylistController extends BaseController {
         $this->sendResponse($playlist, 201);
     }
     
-    /**
-     * Add a track to a playlist
-     * 
-     * @param int $id Playlist ID
-     * @return void
-     */
+    // Add a track to a playlist
     public function addTrack($id) {
         $playlist = $this->playlistModel->getById($id);
         
@@ -117,13 +99,7 @@ class PlaylistController extends BaseController {
         $this->sendResponse(['message' => 'Track added to playlist successfully']);
     }
     
-    /**
-     * Remove a track from a playlist
-     * 
-     * @param int $playlistId Playlist ID
-     * @param int $trackId Track ID
-     * @return void
-     */
+    // Remove a track from a playlist
     public function removeTrack($playlistId, $trackId) {
         $playlist = $this->playlistModel->getById($playlistId);
         
@@ -148,12 +124,7 @@ class PlaylistController extends BaseController {
         $this->sendResponse(['message' => 'Track removed from playlist successfully']);
     }
     
-    /**
-     * Delete a playlist
-     * 
-     * @param int $id Playlist ID
-     * @return void
-     */
+    // Delete a playlist
     public function delete($id) {
         $playlist = $this->playlistModel->getById($id);
         

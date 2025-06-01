@@ -11,13 +11,7 @@ class BaseController {
         $this->db = Database::getInstance();
     }
     
-    /**
-     * Send JSON response with appropriate headers
-     * 
-     * @param mixed $data Data to be encoded as JSON
-     * @param int $statusCode HTTP status code
-     * @return void
-     */
+    // Send JSON response with appropriate headers
     protected function sendResponse($data, $statusCode = 200) {
         http_response_code($statusCode);
         header('Content-Type: application/json');
@@ -25,22 +19,12 @@ class BaseController {
         exit;
     }
     
-    /**
-     * Send error response
-     * 
-     * @param string $message Error message
-     * @param int $statusCode HTTP status code
-     * @return void
-     */
+    // Send error response
     protected function sendError($message, $statusCode = 400) {
         $this->sendResponse(['error' => $message], $statusCode);
     }
     
-    /**
-     * Get request parameters from various sources
-     * 
-     * @return array
-     */
+    // Get request parameters from various sources
     protected function getRequestParams() {
         $params = [];
         
@@ -70,12 +54,7 @@ class BaseController {
         return $params;
     }
     
-    /**
-     * Sanitize input to prevent XSS and other attacks
-     * 
-     * @param mixed $input Input to sanitize
-     * @return mixed
-     */
+    // Sanitize input to prevent XSS and other attacks
     protected function sanitizeInput($input) {
         if (is_array($input)) {
             foreach ($input as $key => $value) {

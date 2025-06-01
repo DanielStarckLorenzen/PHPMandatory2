@@ -11,12 +11,7 @@ class Artist {
         $this->db = $database ?? Database::getInstance();
     }
     
-    /**
-     * Get all artists
-     * 
-     * @param string|null $search Optional search term
-     * @return array
-     */
+    // Get all artists
     public function getAll($search = null) {
         $sql = "SELECT ArtistId, Name FROM Artist";
         $params = [];
@@ -31,34 +26,19 @@ class Artist {
         return $this->db->fetchAll($sql, $params);
     }
     
-    /**
-     * Get artist by ID
-     * 
-     * @param int $id Artist ID
-     * @return array|false
-     */
+    // Get artist by ID
     public function getById($id) {
         $sql = "SELECT ArtistId, Name FROM Artist WHERE ArtistId = ?";
         return $this->db->fetchOne($sql, [$id]);
     }
     
-    /**
-     * Get albums by artist ID
-     * 
-     * @param int $id Artist ID
-     * @return array
-     */
+    // Get albums by artist ID
     public function getAlbums($id) {
         $sql = "SELECT AlbumId, Title FROM Album WHERE ArtistId = ? ORDER BY Title";
         return $this->db->fetchAll($sql, [$id]);
     }
     
-    /**
-     * Create a new artist
-     * 
-     * @param string $name Artist name
-     * @return int|string|false The new artist ID or false on failure
-     */
+    // Create a new artist
     public function create($name) {
         $sql = "SELECT MAX(ArtistId) as maxId FROM Artist";
         $result = $this->db->fetchOne($sql);
@@ -69,12 +49,7 @@ class Artist {
         return $newId;
     }
     
-    /**
-     * Delete an artist
-     * 
-     * @param int $id Artist ID
-     * @return bool
-     */
+    // Delete an artist
     public function delete($id) {
         // Check if artist has albums
         $sql = "SELECT COUNT(*) as count FROM Album WHERE ArtistId = ?";

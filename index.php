@@ -1,5 +1,5 @@
 <?php
-// Enable error reporting for development
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -26,21 +26,19 @@ require_once 'src/controllers/MediaTypeController.php';
 use Chinook\Utils\Logger;
 use Chinook\Utils\Router;
 
-// Initialize logger
 $logger = new Logger();
 $logger->log($_SERVER['REQUEST_METHOD'] . ' ' . $_SERVER['REQUEST_URI']);
 
-// Initialize router
 $router = new Router();
 
-// Register routes for artists
+// artists routes
 $router->get('/artists', 'ArtistController@getAll');
 $router->get('/artists/(\d+)', 'ArtistController@getOne');
 $router->get('/artists/(\d+)/albums', 'ArtistController@getAlbums');
 $router->post('/artists', 'ArtistController@create');
 $router->delete('/artists/(\d+)', 'ArtistController@delete');
 
-// Register routes for albums
+// albums routes
 $router->get('/albums', 'AlbumController@getAll');
 $router->get('/albums/(\d+)', 'AlbumController@getOne');
 $router->get('/albums/(\d+)/tracks', 'AlbumController@getTracks');
@@ -48,18 +46,20 @@ $router->post('/albums', 'AlbumController@create');
 $router->put('/albums/(\d+)', 'AlbumController@update');
 $router->delete('/albums/(\d+)', 'AlbumController@delete');
 
-// Register routes for tracks
+// tracks routes
 $router->get('/tracks', 'TrackController@search');
 $router->get('/tracks/(\d+)', 'TrackController@getOne');
 $router->post('/tracks', 'TrackController@create');
 $router->put('/tracks/(\d+)', 'TrackController@update');
 $router->delete('/tracks/(\d+)', 'TrackController@delete');
 
-// Register routes for media types and genres
+// media types routes
 $router->get('/media_types', 'MediaTypeController@getAll');
+
+// genres routes
 $router->get('/genres', 'GenreController@getAll');
 
-// Register routes for playlists
+// playlists routes
 $router->get('/playlists', 'PlaylistController@getAll');
 $router->get('/playlists/(\d+)', 'PlaylistController@getOne');
 $router->post('/playlists', 'PlaylistController@create');
@@ -67,5 +67,4 @@ $router->post('/playlists/(\d+)/tracks', 'PlaylistController@addTrack');
 $router->delete('/playlists/(\d+)/tracks/(\d+)', 'PlaylistController@removeTrack');
 $router->delete('/playlists/(\d+)', 'PlaylistController@delete');
 
-// Handle the request
 $router->handleRequest(); 

@@ -11,12 +11,7 @@ class Playlist {
         $this->db = Database::getInstance();
     }
     
-    /**
-     * Get all playlists
-     * 
-     * @param string|null $search Optional search term
-     * @return array
-     */
+    // Get all playlists
     public function getAll($search = null) {
         $sql = "SELECT p.PlaylistId, p.Name, COUNT(pt.TrackId) as TrackCount
                 FROM Playlist p
@@ -34,23 +29,13 @@ class Playlist {
         return $this->db->fetchAll($sql, $params);
     }
     
-    /**
-     * Get playlist by ID
-     * 
-     * @param int $id Playlist ID
-     * @return array|false
-     */
+    // Get playlist by ID
     public function getById($id) {
         $sql = "SELECT PlaylistId, Name FROM Playlist WHERE PlaylistId = ?";
         return $this->db->fetchOne($sql, [$id]);
     }
     
-    /**
-     * Get tracks in a playlist
-     * 
-     * @param int $id Playlist ID
-     * @return array
-     */
+    // Get tracks in a playlist
     public function getTracks($id) {
         $sql = "SELECT t.TrackId, t.Name, t.Composer, t.Milliseconds, t.Bytes, t.UnitPrice,
                        a.AlbumId, a.Title as AlbumTitle,
@@ -68,12 +53,7 @@ class Playlist {
         return $this->db->fetchAll($sql, [$id]);
     }
     
-    /**
-     * Create a new playlist
-     * 
-     * @param string $name Playlist name
-     * @return int|string|false The new playlist ID or false on failure
-     */
+    // Create a new playlist
     public function create($name) {
         $sql = "SELECT MAX(PlaylistId) as maxId FROM Playlist";
         $result = $this->db->fetchOne($sql);
@@ -84,13 +64,7 @@ class Playlist {
         return $newId;
     }
     
-    /**
-     * Add a track to a playlist
-     * 
-     * @param int $playlistId Playlist ID
-     * @param int $trackId Track ID
-     * @return bool
-     */
+    // Add a track to a playlist
     public function addTrack($playlistId, $trackId) {
         // Check if track is already in the playlist
         $sql = "SELECT COUNT(*) as count FROM PlaylistTrack WHERE PlaylistId = ? AND TrackId = ?";
@@ -105,25 +79,14 @@ class Playlist {
         return true;
     }
     
-    /**
-     * Remove a track from a playlist
-     * 
-     * @param int $playlistId Playlist ID
-     * @param int $trackId Track ID
-     * @return bool
-     */
+    // Remove a track from a playlist
     public function removeTrack($playlistId, $trackId) {
         $sql = "DELETE FROM PlaylistTrack WHERE PlaylistId = ? AND TrackId = ?";
         $this->db->query($sql, [$playlistId, $trackId]);
         return true;
     }
     
-    /**
-     * Delete a playlist
-     * 
-     * @param int $id Playlist ID
-     * @return bool
-     */
+    // Delete a playlist
     public function delete($id) {
         // Check if playlist has tracks
         $sql = "SELECT COUNT(*) as count FROM PlaylistTrack WHERE PlaylistId = ?";

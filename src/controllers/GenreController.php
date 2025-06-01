@@ -13,11 +13,7 @@ class GenreController extends BaseController {
         $this->genreModel = new Genre();
     }
     
-    /**
-     * Get all genres
-     * 
-     * @return void
-     */
+    // Get all genres
     public function getAll() {
         $genres = $this->genreModel->getAll();
         $this->sendResponse($genres);

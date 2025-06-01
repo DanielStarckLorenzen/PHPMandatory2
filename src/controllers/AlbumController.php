@@ -16,11 +16,7 @@ class AlbumController extends BaseController {
         $this->artistModel = new Artist();
     }
     
-    /**
-     * Get all albums, optionally filtered by search term
-     * 
-     * @return void
-     */
+    // Get all albums, optionally filtered by search term
     public function getAll() {
         $params = $this->getRequestParams();
         $search = isset($params['s']) ? $params['s'] : null;
@@ -29,12 +25,7 @@ class AlbumController extends BaseController {
         $this->sendResponse($albums);
     }
     
-    /**
-     * Get a single album by ID
-     * 
-     * @param int $id Album ID
-     * @return void
-     */
+    // Get a single album by ID
     public function getOne($id) {
         $album = $this->albumModel->getById($id);
         
@@ -46,12 +37,7 @@ class AlbumController extends BaseController {
         $this->sendResponse($album);
     }
     
-    /**
-     * Get all tracks in an album
-     * 
-     * @param int $id Album ID
-     * @return void
-     */
+    // Get all tracks in an album
     public function getTracks($id) {
         $album = $this->albumModel->getById($id);
         
@@ -64,11 +50,7 @@ class AlbumController extends BaseController {
         $this->sendResponse($tracks);
     }
     
-    /**
-     * Create a new album
-     * 
-     * @return void
-     */
+    // Create a new album
     public function create() {
         $params = $this->getRequestParams();
         
@@ -100,12 +82,7 @@ class AlbumController extends BaseController {
         $this->sendResponse($album, 201);
     }
     
-    /**
-     * Update an album
-     * 
-     * @param int $id Album ID
-     * @return void
-     */
+    // Update an album
     public function update($id) {
         $album = $this->albumModel->getById($id);
         
@@ -148,12 +125,7 @@ class AlbumController extends BaseController {
         $this->sendResponse($album);
     }
     
-    /**
-     * Delete an album
-     * 
-     * @param int $id Album ID
-     * @return void
-     */
+    // Delete an album
     public function delete($id) {
         $album = $this->albumModel->getById($id);
         

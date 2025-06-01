@@ -1,6 +1,5 @@
 <?php
 
-// Load environment variables from .env file
 function loadEnv($path) {
     if (!file_exists($path)) {
         return;
@@ -23,21 +22,18 @@ function loadEnv($path) {
     }
 }
 
-// Load .env file from project root
 loadEnv(__DIR__ . '/../.env');
 
-// Determine environment
 $environment = getenv('APP_ENV') ?: 'development';
 
-// Base configuration
 $config = [
     'development' => [
         'display_errors' => true,
         'db' => [
-            'host' => getenv('DEV_DB_HOST') ?: 'localhost',
-            'port' => getenv('DEV_DB_PORT') ?: '3306',
-            'name' => getenv('DEV_DB_NAME') ?: 'chinook',
-            'user' => getenv('DEV_DB_USER') ?: 'root',
+            'host' => getenv('DEV_DB_HOST') ?: '',
+            'port' => getenv('DEV_DB_PORT') ?: '',
+            'name' => getenv('DEV_DB_NAME') ?: '',
+            'user' => getenv('DEV_DB_USER') ?: '',
             'pass' => getenv('DEV_DB_PASS') ?: ''
         ]
     ],
@@ -45,7 +41,7 @@ $config = [
         'display_errors' => false,
         'db' => [
             'host' => getenv('PROD_DB_HOST') ?: '',
-            'port' => getenv('PROD_DB_PORT') ?: '3306',
+            'port' => getenv('PROD_DB_PORT') ?: '',
             'name' => getenv('PROD_DB_NAME') ?: '',
             'user' => getenv('PROD_DB_USER') ?: '',
             'pass' => getenv('PROD_DB_PASS') ?: ''
@@ -53,24 +49,19 @@ $config = [
     ]
 ];
 
-// Set the configuration based on environment
 $currentConfig = $config[$environment];
 
-// Configure error reporting
 ini_set('display_errors', $currentConfig['display_errors']);
 ini_set('display_startup_errors', $currentConfig['display_errors']);
 error_reporting($currentConfig['display_errors'] ? E_ALL : 0);
 
-// Define database constants
 define('DB_HOST', $currentConfig['db']['host']);
 define('DB_PORT', $currentConfig['db']['port']);
 define('DB_NAME', $currentConfig['db']['name']);
 define('DB_USER', $currentConfig['db']['user']);
 define('DB_PASS', $currentConfig['db']['pass']);
 
-// API settings
-define('BASE_URL', '/PHPMandatory2'); // Set base URL for XAMPP subdirectory
+define('BASE_URL', '/PHPMandatory2');
 define('LOG_FILE', __DIR__ . '/../logs/api.log');
 
-// Set default timezone
 date_default_timezone_set('UTC'); 

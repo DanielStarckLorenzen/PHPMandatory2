@@ -13,11 +13,7 @@ class MediaTypeController extends BaseController {
         $this->mediaTypeModel = new MediaType();
     }
     
-    /**
-     * Get all media types
-     * 
-     * @return void
-     */
+    // Get all media types
     public function getAll() {
         $mediaTypes = $this->mediaTypeModel->getAll();
         $this->sendResponse($mediaTypes);

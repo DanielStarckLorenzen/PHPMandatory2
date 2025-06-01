@@ -11,12 +11,7 @@ class Album {
         $this->db = $database ?? Database::getInstance();
     }
     
-    /**
-     * Get all albums with their artists
-     * 
-     * @param string|null $search Optional search term
-     * @return array
-     */
+    // Get all albums with their artists
     public function getAll($search = null) {
         $sql = "SELECT a.AlbumId, a.Title, a.ArtistId, ar.Name as ArtistName 
                 FROM Album a
@@ -33,12 +28,7 @@ class Album {
         return $this->db->fetchAll($sql, $params);
     }
     
-    /**
-     * Get album by ID with artist info
-     * 
-     * @param int $id Album ID
-     * @return array|false
-     */
+    // Get album by ID with artist info
     public function getById($id) {
         $sql = "SELECT a.AlbumId, a.Title, a.ArtistId, ar.Name as ArtistName 
                 FROM Album a
@@ -47,12 +37,7 @@ class Album {
         return $this->db->fetchOne($sql, [$id]);
     }
     
-    /**
-     * Get tracks in an album
-     * 
-     * @param int $id Album ID
-     * @return array
-     */
+    // Get tracks in an album
     public function getTracks($id) {
         $sql = "SELECT t.TrackId, t.Name, t.Composer, t.Milliseconds, t.Bytes, t.UnitPrice,
                        g.GenreId, g.Name as GenreName, 
@@ -65,13 +50,7 @@ class Album {
         return $this->db->fetchAll($sql, [$id]);
     }
     
-    /**
-     * Create a new album
-     * 
-     * @param string $title Album title
-     * @param int $artistId Artist ID
-     * @return int|string|false The new album ID or false on failure
-     */
+    // Create a new album
     public function create($title, $artistId) {
         $sql = "SELECT MAX(AlbumId) as maxId FROM Album";
         $result = $this->db->fetchOne($sql);
@@ -82,13 +61,7 @@ class Album {
         return $newId;
     }
     
-    /**
-     * Update an album
-     * 
-     * @param int $id Album ID
-     * @param array $data Data to update
-     * @return bool
-     */
+    // Update an album
     public function update($id, $data) {
         $fields = [];
         $params = [];
@@ -114,12 +87,7 @@ class Album {
         return true;
     }
     
-    /**
-     * Delete an album
-     * 
-     * @param int $id Album ID
-     * @return bool
-     */
+    // Delete an album
     public function delete($id) {
         // Check if album has tracks
         $sql = "SELECT COUNT(*) as count FROM Track WHERE AlbumId = ?";

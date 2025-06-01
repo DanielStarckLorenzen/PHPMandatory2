@@ -22,11 +22,7 @@ class TrackController extends BaseController {
         $this->mediaTypeModel = new MediaType();
     }
     
-    /**
-     * Search tracks by name or get tracks by composer
-     * 
-     * @return void
-     */
+    // Search tracks by name
     public function search() {
         $params = $this->getRequestParams();
         $search = isset($params['s']) ? $params['s'] : null;
@@ -36,12 +32,7 @@ class TrackController extends BaseController {
         $this->sendResponse($tracks);
     }
     
-    /**
-     * Get a single track by ID
-     * 
-     * @param int $id Track ID
-     * @return void
-     */
+    // Get a single track by ID
     public function getOne($id) {
         $track = $this->trackModel->getById($id);
         
@@ -53,11 +44,7 @@ class TrackController extends BaseController {
         $this->sendResponse($track);
     }
     
-    /**
-     * Create a new track
-     * 
-     * @return void
-     */
+    // Create a new track
     public function create() {
         $params = $this->getRequestParams();
         
@@ -115,12 +102,7 @@ class TrackController extends BaseController {
         $this->sendResponse($track, 201);
     }
     
-    /**
-     * Update a track
-     * 
-     * @param int $id Track ID
-     * @return void
-     */
+    // Update a track
     public function update($id) {
         $track = $this->trackModel->getById($id);
         
@@ -195,12 +177,7 @@ class TrackController extends BaseController {
         $this->sendResponse($track);
     }
     
-    /**
-     * Delete a track
-     * 
-     * @param int $id Track ID
-     * @return void
-     */
+    // Delete a track
     public function delete($id) {
         $track = $this->trackModel->getById($id);
         
