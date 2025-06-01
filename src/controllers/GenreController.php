@@ -1,6 +1,9 @@
 <?php
 
-require_once 'src/models/Genre.php';
+namespace Chinook\Controllers;
+
+use Chinook\Models\Genre;
+use Chinook\Controllers\BaseController;
 
 class GenreController extends BaseController {
     private $genreModel;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Chinook\Utils;
+
 class Logger {
     private $logFile;
 

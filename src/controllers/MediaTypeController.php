@@ -1,6 +1,9 @@
 <?php
 
-require_once 'src/models/MediaType.php';
+namespace Chinook\Controllers;
+
+use Chinook\Models\MediaType;
+use Chinook\Controllers\BaseController;
 
 class MediaTypeController extends BaseController {
     private $mediaTypeModel;

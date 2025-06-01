@@ -1,9 +1,12 @@
 <?php
 
-require_once 'src/models/Track.php';
-require_once 'src/models/Album.php';
-require_once 'src/models/Genre.php';
-require_once 'src/models/MediaType.php';
+namespace Chinook\Controllers;
+
+use Chinook\Models\Track;
+use Chinook\Models\Album;
+use Chinook\Models\Genre;
+use Chinook\Models\MediaType;
+use Chinook\Controllers\BaseController;
 
 class TrackController extends BaseController {
     private $trackModel;

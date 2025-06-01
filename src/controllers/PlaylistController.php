@@ -1,7 +1,10 @@
 <?php
 
-require_once 'src/models/Playlist.php';
-require_once 'src/models/Track.php';
+namespace Chinook\Controllers;
+
+use Chinook\Models\Playlist;
+use Chinook\Models\Track;
+use Chinook\Controllers\BaseController;
 
 class PlaylistController extends BaseController {
     private $playlistModel;

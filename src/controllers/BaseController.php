@@ -1,5 +1,9 @@
 <?php
 
+namespace Chinook\Controllers;
+
+use Chinook\Db\Database;
+
 class BaseController {
     protected $db;
     

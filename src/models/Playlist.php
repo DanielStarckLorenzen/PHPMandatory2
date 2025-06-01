@@ -1,5 +1,9 @@
 <?php
 
+namespace Chinook\Models;
+
+use Chinook\Db\Database;
+
 class Playlist {
     private $db;
     

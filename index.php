@@ -9,6 +9,12 @@ require_once 'config/config.php';
 require_once 'src/utils/Router.php';
 require_once 'src/utils/Logger.php';
 require_once 'src/db/Database.php';
+require_once 'src/models/Artist.php';
+require_once 'src/models/Album.php';
+require_once 'src/models/Track.php';
+require_once 'src/models/Playlist.php';
+require_once 'src/models/MediaType.php';
+require_once 'src/models/Genre.php';
 require_once 'src/controllers/BaseController.php';
 require_once 'src/controllers/ArtistController.php';
 require_once 'src/controllers/AlbumController.php';
@@ -16,6 +22,9 @@ require_once 'src/controllers/TrackController.php';
 require_once 'src/controllers/PlaylistController.php';
 require_once 'src/controllers/GenreController.php';
 require_once 'src/controllers/MediaTypeController.php';
+
+use Chinook\Utils\Logger;
+use Chinook\Utils\Router;
 
 // Initialize logger
 $logger = new Logger();

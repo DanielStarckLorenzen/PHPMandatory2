@@ -1,7 +1,10 @@
 <?php
 
-require_once 'src/models/Album.php';
-require_once 'src/models/Artist.php';
+namespace Chinook\Controllers;
+
+use Chinook\Models\Album;
+use Chinook\Models\Artist;
+use Chinook\Controllers\BaseController;
 
 class AlbumController extends BaseController {
     private $albumModel;

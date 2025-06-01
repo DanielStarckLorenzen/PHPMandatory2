@@ -1,28 +1,54 @@
 <?php
 
+// Load environment variables from .env file
+function loadEnv($path) {
+    if (!file_exists($path)) {
+        return;
+    }
+
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos($line, '#') === 0 || empty(trim($line))) {
+            continue;
+        }
+
+        list($name, $value) = explode('=', $line, 2);
+        $name = trim($name);
+        $value = trim($value);
+        
+        if (!array_key_exists($name, $_ENV)) {
+            putenv(sprintf('%s=%s', $name, $value));
+            $_ENV[$name] = $value;
+        }
+    }
+}
+
+// Load .env file from project root
+loadEnv(__DIR__ . '/../.env');
+
 // Determine environment
-$environment = getenv('APP_ENV') ?: 'production'; // Default to production for InfinityFree
+$environment = getenv('APP_ENV') ?: 'development';
 
 // Base configuration
 $config = [
     'development' => [
         'display_errors' => true,
         'db' => [
-            'host' => 'localhost',
-            'port' => '3306',
-            'name' => 'chinook',
-            'user' => 'your_dev_username',
-            'pass' => 'your_dev_password'
+            'host' => getenv('DEV_DB_HOST') ?: 'localhost',
+            'port' => getenv('DEV_DB_PORT') ?: '3306',
+            'name' => getenv('DEV_DB_NAME') ?: 'chinook',
+            'user' => getenv('DEV_DB_USER') ?: 'root',
+            'pass' => getenv('DEV_DB_PASS') ?: ''
         ]
     ],
     'production' => [
         'display_errors' => false,
         'db' => [
-            'host' => 'sql205.infinityfree.com',
-            'port' => '3306',
-            'name' => 'if0_39010221_chinook',
-            'user' => 'if0_39010221',
-            'pass' => '0tQoXYmcRP'
+            'host' => getenv('PROD_DB_HOST') ?: '',
+            'port' => getenv('PROD_DB_PORT') ?: '3306',
+            'name' => getenv('PROD_DB_NAME') ?: '',
+            'user' => getenv('PROD_DB_USER') ?: '',
+            'pass' => getenv('PROD_DB_PASS') ?: ''
         ]
     ]
 ];
@@ -43,7 +69,7 @@ define('DB_USER', $currentConfig['db']['user']);
 define('DB_PASS', $currentConfig['db']['pass']);
 
 // API settings
-define('BASE_URL', ''); // Empty for production
+define('BASE_URL', '/PHPMandatory2'); // Set base URL for XAMPP subdirectory
 define('LOG_FILE', __DIR__ . '/../logs/api.log');
 
 // Set default timezone

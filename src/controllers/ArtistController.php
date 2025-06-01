@@ -1,6 +1,9 @@
 <?php
 
-require_once 'src/models/Artist.php';
+namespace Chinook\Controllers;
+
+use Chinook\Models\Artist;
+use Chinook\Controllers\BaseController;
 
 class ArtistController extends BaseController {
     private $artistModel;

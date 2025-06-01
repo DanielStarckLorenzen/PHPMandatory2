@@ -20,4 +20,11 @@ Thumbs.db
 
 # Temporary files
 *.tmp
-*.log 
+*.log
+
+# Coverage reports
+coverage-html/
+coverage-xml/
+coverage-clover.xml
+coverage.txt
+phpunit-report.xml 

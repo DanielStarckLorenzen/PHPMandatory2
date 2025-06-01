@@ -1,5 +1,7 @@
 <?php
 
+namespace Chinook\Utils;
+
 class Router {
     private $routes = [
         'GET' => [],
@@ -95,8 +97,11 @@ class Router {
                 // Parse handler
                 list($controller, $action) = explode('@', $handler);
                 
+                // Add namespace to controller
+                $controllerClass = "Chinook\\Controllers\\" . $controller;
+                
                 // Create controller instance and call the action
-                $controllerInstance = new $controller();
+                $controllerInstance = new $controllerClass();
                 call_user_func_array([$controllerInstance, $action], $params);
                 
                 break;

@@ -1,10 +1,14 @@
 <?php
 
+namespace Chinook\Models;
+
+use Chinook\Db\Database;
+
 class Album {
     private $db;
     
-    public function __construct() {
-        $this->db = Database::getInstance();
+    public function __construct($database = null) {
+        $this->db = $database ?? Database::getInstance();
     }
     
     /**
